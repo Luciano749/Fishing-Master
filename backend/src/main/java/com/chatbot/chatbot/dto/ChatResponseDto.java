@@ -1,5 +1,10 @@
 package com.chatbot.chatbot.dto;
 
-public class ChatResponseDto {
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class ChatResponseDto {
+    private String response;
 }

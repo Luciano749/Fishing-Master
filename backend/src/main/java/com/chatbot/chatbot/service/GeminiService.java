@@ -19,7 +19,10 @@ public class GeminiService {
     private final GeminiConfig geminiConfig;
 
     public String conversation(String message, WeatherApiResponse weather) {
-        String detailedWeather = WeatherPromptBuilder.buildDetailedWeatherInfo(weather);
+        String detailedWeather = weather != null 
+            ? WeatherPromptBuilder.buildDetailedWeatherInfo(weather)
+            : "Dados climáticos não disponíveis no momento.";
+            
         String prompt = String.format("Usuário: %s\n\n%s\n\nResponda de forma natural e contextualizada.",
                 message, detailedWeather);
 
