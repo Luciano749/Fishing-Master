@@ -2,13 +2,25 @@ import styled from "styled-components";
 
 export const CardContainer = styled.div`
     animation: oceanWaves 10s ease-in-out infinite;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2rem);
+    border-radius: 2.4rem;
+    border: 0.1rem solid rgba(255, 255, 255, 0.2);
+    padding: 3rem;
+    width: 50rem;
+    max-width: 90vw;
+    max-height: 90vh;
+    margin: 2rem;
+    text-align: center;
+    box-shadow: 
+        0 0.8rem 3.2rem 0 rgba(31, 38, 135, 0.37),
+        0 0 0 0.1rem rgba(255, 255, 255, 0.05) inset;
     position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     overflow: hidden;
-
 
     &::before {
         content: '';
@@ -24,26 +36,6 @@ export const CardContainer = styled.div`
         0%, 100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
     }
-`
-
-export const ChatWrapper = styled.main`
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(2rem);
-    border-radius: 2.4rem;
-    border: 0.1rem solid rgba(255, 255, 255, 0.2);
-    padding: 3rem;
-    width: 50rem;
-    max-width: 90vw;
-    max-height: 90vh;
-    text-align: center;
-    box-shadow: 
-        0 0.8rem 3.2rem 0 rgba(31, 38, 135, 0.37),
-        0 0 0 0.1rem rgba(255, 255, 255, 0.05) inset;
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 `
 
 export const ChatTitle = styled.h1`
@@ -138,8 +130,28 @@ export const ResponseArea = styled.div`
     border-radius: 1.2rem;
     border: 0.1rem solid rgba(255, 255, 255, 0.1);
     text-align: left;
-
+    flex: 1;
     overflow-y: auto;
+    max-height: 40vh;
+
+    /* Personalizar scrollbar */
+    &::-webkit-scrollbar {
+        width: 0.6rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0.3rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(79, 195, 247, 0.6);
+        border-radius: 0.3rem;
+        
+        &:hover {
+            background: rgba(79, 195, 247, 0.8);
+        }
+    }
 `
 
 export const ResponseTitle = styled.h3`
@@ -150,13 +162,26 @@ export const ResponseTitle = styled.h3`
     text-align: center;
 `
 
-export const ResponseMessage = styled.p`
+export const ResponseMessage = styled.div`
     color: rgba(255, 255, 255, 0.9);
     font-size: 1.4rem;
     line-height: 1.6;
     margin: 0;
     white-space: pre-wrap;
     word-wrap: break-word;
+    overflow-wrap: break-word;
+
+    * {
+        font-size: 1.4rem !important;
+        line-height: 1.6 !important;
+    }
+
+    p {
+        margin: 0.3rem 0 !important;
+        color: inherit;
+        font-size: 1.4rem !important;
+        line-height: 1.6 !important;
+    }
 `
 
 export const InputArea = styled.div`

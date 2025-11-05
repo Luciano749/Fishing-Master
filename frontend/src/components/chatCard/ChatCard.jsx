@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 import * as S from './ChatCard.styles'
 import iconImage from '../../assets/fishIcon.png'
 
@@ -24,14 +25,13 @@ const ChatCard = () => {
         setInput('');
 
         try {
-            // Enviar apenas se houver coordenadas válidas
             const requestBody = {
                 message: currentInput,
                 lat: lat !== null ? String(lat) : "",
                 lon: lon !== null ? String(lon) : ""
             };
 
-            const response = await fetch('http://192.168.100.85:8080/api/conversar', {
+            const response = await fetch('http://localhost:8080/api/conversar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const ChatCard = () => {
         } catch (error) {
             console.error('Error fetching message:', error);
             setError('Erro ao buscar resposta. Tente novamente.');
-            setInput(currentInput); // Restaura o input em caso de erro
+            setInput(currentInput);
         } finally {
             setLoading(false);
         }
@@ -66,7 +66,6 @@ const ChatCard = () => {
                 (error) => {
                     console.error('Erro ao obter localização:', error);
                     setLocationError(true);
-                    // Define coordenadas padrão ou deixa como null
                     setLat(null);
                     setLon(null);
                 }
@@ -85,9 +84,8 @@ const ChatCard = () => {
 
     return (
         <S.CardContainer>
-            <S.ChatWrapper>
                 <S.ChatTitle>
-                    Oceanic
+                    Marlin
                     <S.BlueChatInfo>Chat</S.BlueChatInfo>
                 </S.ChatTitle>
                 <S.ChatSubtitle>
@@ -123,7 +121,9 @@ const ChatCard = () => {
                         {message && !loading && (
                             <>
                                 <S.ResponseTitle>Resposta:</S.ResponseTitle>
-                                <S.ResponseMessage>{message}</S.ResponseMessage>
+                                <S.ResponseMessage>
+                                    <ReactMarkdown>{message}</ReactMarkdown>
+                                </S.ResponseMessage>
                             </>
                         )}
                     </S.ResponseArea>
@@ -147,7 +147,6 @@ const ChatCard = () => {
                         }}
                     />
                 </S.InputArea>
-            </S.ChatWrapper>
         </S.CardContainer>
     )
 }

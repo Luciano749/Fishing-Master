@@ -16,6 +16,7 @@ const ResetStyles = createGlobalStyle`
   html,
   body {
     height: 100%;
+        padding: 3rem;
   }
 
   body {
