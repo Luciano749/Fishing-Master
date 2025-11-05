@@ -35,13 +35,11 @@ public class ChatBotController {
             
             WeatherApiResponse weather = null;
             
-            // Só busca o clima se houver coordenadas válidas
             if (lat != null && lon != null && !lat.isEmpty() && !lon.isEmpty()) {
                 try {
                     weather = weatherApiService.getWeather(lat, lon);
                 } catch (Exception weatherError) {
                     System.err.println("Erro ao buscar clima: " + weatherError.getMessage());
-                    // Continua sem informações de clima
                 }
             }
             

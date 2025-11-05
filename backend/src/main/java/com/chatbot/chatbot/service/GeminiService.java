@@ -30,7 +30,6 @@ public class GeminiService {
         final String modelName = geminiConfig.getModelName();
         final String trainingPrompt = geminiConfig.getPromptTemplate();
 
-        // implementação real de chamada à API Gemini
         Client client = Client.builder().apiKey(apiKey).build();
 
         GenerateContentConfig config = GenerateContentConfig.builder()
