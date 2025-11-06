@@ -14,16 +14,21 @@ Um chatbot especializado em pesca que combina inteligência artificial (Google G
 - **Segurança Primeiro**: Alertas automáticos sobre condições perigosas de pesca
 - **Conselhos Táticos**: Recomendações específicas baseadas em dados concretos, não genéricos
 
-### 🌦️ Integração Meteorológica
-- Dados meteorológicos em tempo real via API
-- Análise de como condições climáticas afetam o comportamento dos peixes
-- Recomendações ajustadas conforme pressão atmosférica, temperatura e vento
+### 📍 Geolocalização Automática
+- **Detecção Automática de Local**: Utiliza a API de Geolocalização do navegador para capturar automaticamente sua localização (latitude e longitude)
+- **Precisão em Tempo Real**: Obtém dados meteorológicos exatos para sua posição atual
+- **Funcionalidade Inteligente**: Caso não consiga acessar a geolocalização, o sistema continua funcionando com dados gerais
+
+### 🌦️ Integração Meteorológica Contextualizada
+- **Dados Meteorológicos Precisos**: Consulta automática do clima baseada na sua geolocalização atual
+- **Análise Comportamental**: Como as condições climáticas do seu local exato afetam o comportamento dos peixes
+- **Recomendações Personalizadas**: Ajustes específicos conforme pressão atmosférica, temperatura, vento e umidade da sua região
 
 ### 🎯 Recursos Especializados
-- Cruzamento inteligente de dados (Clima ↔ Comportamento dos Peixes ↔ Geografia)
-- Análise ictiológica (comportamento de peixes)
-- Recomendações de iscas e técnicas específicas para cada situação
-- Interface responsiva e intuitiva
+- **Triangulação de Dados**: Cruzamento inteligente de dados (Geolocalização ↔ Clima ↔ Comportamento dos Peixes)
+- **Análise Ictiológica**: Comportamento de peixes baseado em condições climáticas reais
+- **Recomendações Contextuais**: Iscas e técnicas específicas para sua localização e clima atual
+- **Interface Responsiva**: Experiência intuitiva com captura automática de localização
 
 ## 🏗️ Arquitetura do Projeto
 
@@ -150,10 +155,13 @@ Endpoint principal para interação com o chatbot.
 **Request Body:**
 ```json
 {
-  "message": "Quero pescar tucunaré hoje em Brasília",
-  "location": "Brasília, DF"
+  "message": "Quero pescar tucunaré hoje",
+  "lat": "-15.7801",
+  "lon": "-47.9292"
 }
 ```
+
+> **Nota**: Os campos `lat` e `lon` são automaticamente capturados pela geolocalização do navegador. Se não disponíveis, o sistema funciona sem os dados meteorológicos específicos.
 
 **Response:**
 ```json
@@ -166,19 +174,26 @@ Endpoint principal para interação com o chatbot.
 ## 🎯 Como Usar
 
 1. **Acesse a Interface**: Abra `http://localhost:5173`
-2. **Faça sua Consulta**: Digite sua pergunta sobre pesca
-3. **Informe a Localização**: Adicione o local onde pretende pescar
-4. **Receba Análise Técnica**: O Mestre Pescador fornecerá:
-   - Análise de segurança
-   - Condições meteorológicas e impacto na pesca
-   - Recomendações de iscas e técnicas
-   - Especies mais prováveis para o local/condições
+2. **Permita a Geolocalização**: O navegador solicitará permissão para acessar sua localização (recomendado para análise precisa)
+3. **Faça sua Consulta**: Digite sua pergunta sobre pesca
+4. **Análise Automática**: O sistema automaticamente:
+   - Captura sua localização atual (lat/lon)
+   - Consulta as condições meteorológicas em tempo real
+   - Analisa o impacto do clima no comportamento dos peixes
+5. **Receba Análise Técnica Personalizada**: O Mestre Pescador fornecerá:
+   - Análise de segurança baseada nas condições locais
+   - Condições meteorológicas específicas da sua região e impacto na pesca
+   - Recomendações de iscas e técnicas para o clima atual
+   - Espécies mais prováveis considerando local e condições climáticas
 
 ### Exemplos de Consultas
 
-- "Quero pescar tucunaré hoje no Lago Paranoá"
-- "Melhores horários para pescar traíra amanhã em São Paulo"
-- "Que isca usar para dourado no Rio São Francisco com esse tempo?"
+- "Quero pescar tucunaré hoje" *(o sistema detecta automaticamente sua localização e o clima atual)*
+- "Melhores horários para pescar traíra com esse tempo" *(analisa as condições meteorológicas da sua região)*
+- "Que isca usar para dourado com essa pressão atmosférica?" *(considera dados climáticos em tempo real)*
+- "É seguro pescar hoje?" *(analisa condições de segurança baseadas no clima local)*
+
+> **💡 Dica**: Com a geolocalização ativada, suas perguntas podem ser mais diretas, pois o sistema já sabe onde você está e quais são as condições climáticas atuais!
 
 ## 🔒 Segurança e CORS
 
